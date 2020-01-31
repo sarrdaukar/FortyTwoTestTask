@@ -3,6 +3,8 @@ from datetime import date
 from django.test import Client, TestCase
 from django.core.urlresolvers import reverse
 
+from apps.hello.models import Profile
+
 
 class TestMainView(TestCase):
 
