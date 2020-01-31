@@ -2,6 +2,7 @@ from datetime import date
 
 from django.test import Client, TestCase
 from django.core.urlresolvers import reverse
+from django.utils.dateformat import DateFormat
 
 from apps.hello.models import Profile
 
@@ -22,7 +23,8 @@ class TestMainView(TestCase):
     def test_main_view(self):
         """
         test main view returning correct statuscode,
-        using right template and having all necessary data in context
+        using right template and having all necessary data in context and
+        template
         """
         response = self.client.get(reverse('main'))
         self.assertEqual(response.status_code, 200)
@@ -39,6 +41,17 @@ class TestMainView(TestCase):
         self.assertEqual(profile.jabber, self.profile.jabber)
         self.assertEqual(profile.skype, self.profile.skype)
         self.assertEqual(profile.other_contacts, self.profile.other_contacts)
+
+        self.assertContains(response, self.profile.name)
+        self.assertContains(response, self.profile.last_name)
+        self.assertContains(
+            response, DateFormat(self.profile.birthdate).format('d.m.Y')
+        )
+        self.assertContains(response, self.profile.bio)
+        self.assertContains(response, self.profile.email)
+        self.assertContains(response, self.profile.jabber)
+        self.assertContains(response, self.profile.skype)
+        self.assertContains(response, self.profile.other_contacts)
 
 
 class TestProfileModel(TestCase):
