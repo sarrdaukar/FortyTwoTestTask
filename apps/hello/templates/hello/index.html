@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% block title %}Contacts of {{ profile.name }} {{ profile.last_name }}{% endblock title %}
 {% block content %}
 <h1>Contacts!</h1>
 <div class="row">
     <div class="col-6 col-md-6 col-sm-6 col-xs-12">
         <div class="top-buffer">
-            Name: Yaroslav
+            Name: {{ profile.name }}
         </div>
         <div class="top-buffer">
-            Last name: Cheb
+            Last name: {{ profile.last_name }}
         </div>
         <div class="top-buffer">
-            Date of birth: 06.11.1992
+            Date of birth: {{ profile.birthdate|date:"d.m.Y" }}
         </div>
         <div class="top-buffer">
-            Bio: My short biography here
+            Bio: {{ profile.bio }}
         </div>
     </div>
     <div class="col-6 col-md-6 col-sm-6 col-xs-12">
@@ -22,18 +23,18 @@
             Contacts:
         </div>
         <div class="top-buffer">
-            Email: <a href="mailto:sarrdaukar@gmail.com">
-                sarrdaukar@gmail.com
+            Email: <a href="mailto:{{ profile.email }}">
+                {{ profile.email }}
             </a>
         </div>
         <div class="top-buffer">
-            Jabber: sarrdaukar@xmpp.jp
+            Jabber: {{ profile.jabber }}
         </div>
         <div class="top-buffer">
-            Skype: the_mind_deviator
+            Skype: {{ profile.skype }}
         </div>
         <div class="top-buffer">
-            Other contacts: Telegram: @The_Ancient
+            Other contacts: {{ profile.other_contacts }}
         </div>
     </div>
 </div>
