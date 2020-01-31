@@ -10,6 +10,14 @@ class TestMainView(TestCase):
 
     def setUp(self):
         self.client = Client()
+        profile = Profile(
+            name="Yaroslav", last_name="Cheb", birthdate=date(1992, 11, 6),
+            bio="My short biography", email="mail@mail.com",
+            jabber="jabber@jabber.com", skype="skype_nick",
+            other_contacts="Other contacts"
+        )
+        profile.save()
+        self.profile = profile
 
     def test_main_view(self):
         """
@@ -22,14 +30,15 @@ class TestMainView(TestCase):
         self.assertIn("profile", response.context)
 
         profile = response.context["profile"]
-        self.assertEqual(profile.name, "Yaroslav")
-        self.assertEqual(profile.last_name, "Cheb")
-        self.assertEqual(profile.birthdate, date(1992, 11, 6))
-        self.assertEqual(profile.bio, "My short biography")
-        self.assertEqual(profile.email, "mail@mail.com")
-        self.assertEqual(profile.jabber, "jabber@jabber.com")
-        self.assertEqual(profile.skype, "skype_nick")
-        self.assertEqual(profile.other_contacts, "Other contacts")
+        self.assertIsInstance(response.context["profile"], Profile)
+        self.assertEqual(profile.name, self.profile.name)
+        self.assertEqual(profile.last_name, self.profile.last_name)
+        self.assertEqual(profile.birthdate, self.profile.birthdate)
+        self.assertEqual(profile.bio, self.profile.bio)
+        self.assertEqual(profile.email, self.profile.email)
+        self.assertEqual(profile.jabber, self.profile.jabber)
+        self.assertEqual(profile.skype, self.profile.skype)
+        self.assertEqual(profile.other_contacts, self.profile.other_contacts)
 
 
 class TestProfileModel(TestCase):
