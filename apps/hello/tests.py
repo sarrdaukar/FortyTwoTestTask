@@ -8,17 +8,11 @@ from apps.hello.models import Profile
 
 
 class TestMainView(TestCase):
+    fixtures = ["hello/fixtures/initial_data.json"]
 
     def setUp(self):
         self.client = Client()
-        profile = Profile(
-            name="Yaroslav", last_name="Cheb", birthdate=date(1992, 11, 6),
-            bio="My short biography", email="mail@mail.com",
-            jabber="jabber@jabber.com", skype="skype_nick",
-            other_contacts="Other contacts"
-        )
-        profile.save()
-        self.profile = profile
+        self.profile = Profile.load()
 
     def test_main_view(self):
         """
@@ -55,16 +49,10 @@ class TestMainView(TestCase):
 
 
 class TestProfileModel(TestCase):
+    fixtures = ["hello/fixtures/initial_data.json"]
 
     def setUp(self):
-        profile = Profile(
-            name="Yaroslav", last_name="Cheb", birthdate=date(1992, 11, 6),
-            bio="My short biography", email="mail@mail.com",
-            jabber="jabber@jabber.com", skype="skype_nick",
-            other_contacts="Other contacts"
-        )
-        profile.save()
-        self.profile = profile
+        self.profile = Profile.load()
 
     def test_profile_load(self):
         "Test Profile load method"

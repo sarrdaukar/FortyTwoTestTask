@@ -1,0 +1,16 @@
+[
+{
+    "pk": 1, 
+    "model": "hello.profile", 
+    "fields": {
+        "bio": "My short biogrpahy", 
+        "last_name": "Cheb", 
+        "name": "Yaroslav", 
+        "other_contacts": "Other contacts", 
+        "birthdate": "1992-11-06", 
+        "skype": "skype_nick", 
+        "jabber": "jabber@jabber.com", 
+        "email": "mail@mail.com"
+    }
+}
+]
